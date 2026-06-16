@@ -16,7 +16,7 @@ create table public.profiles (
   avatar_url text,
   website_url text,
   twitter_handle text,
-  linkedin_url text,
+  linkedin_url text, 
   github_url text,
   location text,
   reputation int not null default 0,
