@@ -26,7 +26,7 @@ function createSupabaseClient() {
     }
   });
 }
- 
+
 let _supabase: ReturnType<typeof createSupabaseClient> | undefined;
 
 // Import the supabase client like this:
