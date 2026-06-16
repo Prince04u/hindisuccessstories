@@ -1,4 +1,3 @@
-```ts
 import "./lib/error-capture";
 
 export default {
