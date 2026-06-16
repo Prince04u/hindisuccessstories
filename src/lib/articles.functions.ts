@@ -10,22 +10,35 @@ const ARTICLE_LIST = `
 `;
 
 export const listHomeArticles = createServerFn({ method: "GET" }).handler(async () => {
-  const { publicClient } = await import("./supabase-public.server");
-  const sb = publicClient();
-  const [featured, latest, trending] = await Promise.all([
-    sb.from("articles").select(ARTICLE_LIST).eq("status", "published").eq("is_featured", true).order("published_at", { ascending: false }).limit(1),
-    sb.from("articles").select(ARTICLE_LIST).eq("status", "published").order("published_at", { ascending: false }).limit(8),
-    sb.from("articles").select(ARTICLE_LIST).eq("status", "published").order("view_count", { ascending: false }).limit(6),
-  ]);
-  const { data: categories } = await sb.from("categories").select("*").order("name");
-  const { data: topAuthors } = await sb.from("profiles").select("id, username, display_name, avatar_url, bio, reputation").order("reputation", { ascending: false }).limit(5);
-  return {
-    featured: featured.data?.[0] ?? latest.data?.[0] ?? null,
-    latest: latest.data ?? [],
-    trending: trending.data ?? [],
-    categories: categories ?? [],
-    topAuthors: topAuthors ?? [],
-  };
+  try {
+    console.log("HOME START");
+
+    const { publicClient } = await import("./supabase-public.server");
+    const sb = publicClient();
+
+    console.log("SUPABASE OK");
+
+    const { data, error } = await sb
+      .from("articles")
+      .select("*")
+      .limit(1);
+
+    console.log("ARTICLES RESULT", {
+      data,
+      error,
+    });
+
+    return {
+      featured: null,
+      latest: [],
+      trending: [],
+      categories: [],
+      topAuthors: [],
+    };
+  } catch (err) {
+    console.error("HOME ERROR:", err);
+    throw err;
+  }
 });
 
 export const getArticleBySlug = createServerFn({ method: "GET" })
