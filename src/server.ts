@@ -1,45 +1,31 @@
 import "./lib/error-capture";
 
-type ServerEntry = {
-  fetch: (
-    request: Request,
-    env: unknown,
-    ctx: unknown
-  ) => Promise<Response> | Response;
+export default {
+async fetch(request: Request, env: any, ctx: any) {
+try {
+const mod = await import("@tanstack/react-start/server-entry");
+
+
+  const handler: any = mod.default ?? mod;
+
+  return await handler.fetch(request, env, ctx);
+} catch (error: any) {
+  return new Response(
+    `<pre style="padding:20px;white-space:pre-wrap">
+
+
+${error?.stack || error?.message || JSON.stringify(error, null, 2)} </pre>`,
+{
+status: 500,
+headers: {
+"content-type": "text/html;charset=utf-8",
+},
+}
+);
+}
+},
 };
 
-let serverEntryPromise: Promise<ServerEntry> | undefined;
-
-async function getServerEntry(): Promise<ServerEntry> {
-  if (!serverEntryPromise) {
-    serverEntryPromise = import("@tanstack/react-start/server-entry").then(
-      (m) => (m.default ?? m) as ServerEntry
-    );
-  }
-
-  return serverEntryPromise;
-}
-
-export default {
-  async fetch(request: Request, env: unknown, ctx: unknown) {
-    try {
-      const handler = await getServerEntry();
-
-      const response = await handler.fetch(request, env, ctx);
-
-      if (response.status >= 500) {
-        const text = await response.clone().text();
-
-        return new Response(
-          `<pre style="white-space:pre-wrap;padding:20px">${text}</pre>`,
-          {
-            status: 500,
-            headers: {
-              "content-type": "text/html; charset=utf-8",
-            },
-          }
-        );
-      }
 
       return response;
     } catch (error: any) {
