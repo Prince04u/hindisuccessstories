@@ -3,9 +3,12 @@
   "name": "hindisuccessstories",
   "main": "dist/server/server.js",
   "compatibility_date": "2026-06-16",
-  "compatibility_flags": [
-    "nodejs_compat"
-  ],
+  "compatibility_flags": ["nodejs_compat"],
+
+  "vars": {
+    "SUPABASE_URL": "https://YOUR_PROJECT.supabase.co",
+    "SUPABASE_PUBLISHABLE_KEY": "YOUR_PUBLISHABLE_KEY"
+  },
 
   "assets": {
     "directory": "./dist/client"
