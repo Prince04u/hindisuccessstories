@@ -1,4 +1,3 @@
-```ts
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 
@@ -14,4 +13,4 @@ export function publicClient() {
 
   return createClient<Database>("x", "x");
 }
-```
+
