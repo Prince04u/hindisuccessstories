@@ -1,7 +1,7 @@
 export const requireSupabaseAuth = createMiddleware({ type: 'function' }).server(
 async ({ next }) => {
 
-```
+
 const SUPABASE_URL =
   process.env.SUPABASE_URL ||
   import.meta.env.VITE_SUPABASE_URL;
@@ -69,6 +69,7 @@ return next({
     claims: data.claims,
   },
 });
+
 
 },
 );
