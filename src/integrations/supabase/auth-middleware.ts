@@ -69,7 +69,6 @@ return next({
     claims: data.claims,
   },
 });
-```
 
 },
 );
