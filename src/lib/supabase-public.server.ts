@@ -9,3 +9,4 @@ export function publicClient() {
     { auth: { storage: undefined, persistSession: false, autoRefreshToken: false } },
   );
 }
+ 
