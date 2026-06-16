@@ -3,11 +3,15 @@
   "name": "hindisuccessstories",
   "main": "dist/server/server.js",
   "compatibility_date": "2026-06-16",
-  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
 
   "vars": {
-    "SUPABASE_URL": "https://YOUR_PROJECT.supabase.co",
-    "SUPABASE_PUBLISHABLE_KEY": "YOUR_PUBLISHABLE_KEY"
+    "SUPABASE_URL": "https://pdknridsgqlwpjcgutuy.supabase.co",
+    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_C-chaTlhf6aAlfaIFxeVYQ_Qun_Zesb",
+    "VITE_SUPABASE_URL": "https://pdknridsgqlwpjcgutuy.supabase.co",
+    "VITE_SUPABASE_PUBLISHABLE_KEY": "sb_publishable_C-chaTlhf6aAlfaIFxeVYQ_Qun_Zesb"
   },
 
   "assets": {
