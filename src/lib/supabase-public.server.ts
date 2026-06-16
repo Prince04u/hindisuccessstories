@@ -16,15 +16,13 @@ url: !!url,
 key: !!key,
 });
 
-```
 throw new Error(
   `Missing Supabase env: URL=${!!url} KEY=${!!key}`
 );
-```
 
 }
 
-return createClient<Database>(url, key, {
+return createClient(url, key, {
 auth: {
 persistSession: false,
 autoRefreshToken: false,
