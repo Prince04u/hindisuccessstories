@@ -1,16 +1,9 @@
 import "./lib/error-capture";
 
 export default {
-  async fetch() {
-    try {
-      await import("@/integrations/supabase/auth-middleware");
-
-      return new Response("AUTH IMPORT OK");
-    } catch (e: any) {
-      return new Response(
-        e?.stack || e?.message || String(e),
-        { status: 500 }
-      );
-    }
+  async fetch(request: Request, env: any, ctx: any) {
+    const mod = await import("@tanstack/react-start/server-entry");
+    const handler: any = mod.default ?? mod;
+    return handler.fetch(request, env, ctx);
   },
 };
