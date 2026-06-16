@@ -1,32 +1,17 @@
+```ts
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 
 export function publicClient() {
-const url =
-process.env.SUPABASE_URL ||
-process.env.VITE_SUPABASE_URL;
+  console.log("SERVER ENV CHECK");
+  console.log("SUPABASE_URL =", process.env.SUPABASE_URL);
+  console.log(
+    "SUPABASE_PUBLISHABLE_KEY =",
+    process.env.SUPABASE_PUBLISHABLE_KEY
+  );
 
-const key =
-process.env.SUPABASE_PUBLISHABLE_KEY ||
-process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+  throw new Error("STOP HERE");
 
-if (!url || !key) {
-console.error("SUPABASE ENV MISSING", {
-url: !!url,
-key: !!key,
-});
-
-throw new Error(
-  `Missing Supabase env: URL=${!!url} KEY=${!!key}`
-);
-
+  return createClient<Database>("x", "x");
 }
-
-return createClient(url, key, {
-auth: {
-persistSession: false,
-autoRefreshToken: false,
-storage: undefined,
-},
-});
-}
+```
