@@ -16,11 +16,11 @@ url: !!url,
 key: !!key,
 });
 
-```
+  
 throw new Error(
   `Missing Supabase env: URL=${!!url} KEY=${!!key}`
 );
-```
+
 
 }
 
